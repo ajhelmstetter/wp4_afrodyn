@@ -14,6 +14,7 @@ load("~/Dropbox/projects/AJH_WP4_AFRODYN/data/wp4.Rdata")
 list_r.div.refD<-list()
 list_r.div.mean<-list()
 list_sD<-list()
+list_gen_dist<-list()
 
 #loop through parameters
 #change from 1:number of parameters you want to loop through 
@@ -49,7 +50,7 @@ Dscan = 0.5
 # Prepare lists to receive results
 ### 
 
-pdfname<-paste("Dscan",Dscan,
+pdfname<-paste("present","Dscan",Dscan,
       "Radius",Radius,
       "refDGlobal",refDglobal,
       "refD",refD,
@@ -78,21 +79,22 @@ for(i in 1:length(list_gen)){
   #plot div for ref Dist
   r.div.refD<-setValues(r.div.refD,sD$Div.table.cleaned$div.refD)
   {plot(r.div.refD,addfun=points(list_datageo[[i]]$lon,list_datageo[[i]]$lat,cex=0.2))
-    title(paste("div.refD"),sub=paste0("Radius=",sD$Radius,"km, refD=",sD$refD,"km, ScanResol=",sD$Dscan,"?, Ncells=",sum(!is.na(sD$Div.table.cleaned$div.refD))))}
+    title(paste(names(list_gen)[i],"div.refD",sep = " "),sub=paste0("Radius=",sD$Radius,"km, refD=",sD$refD,"km, ScanResol=",sD$Dscan,"?, Ncells=",sum(!is.na(sD$Div.table.cleaned$div.refD))))}
   
   #plot mean divergence
   r.div.mean<-setValues(r.div.mean,sD$Div.table$div.mean)
   {plot(r.div.mean,addfun=points(list_datageo[[i]]$lon,list_datageo[[i]]$lat,cex=0.2))
-    title(paste("div.mean"),sub=paste0("Radius=",sD$Radius,"km, refD=",sD$refD,"km, ScanResol=",sD$Dscan,"?, Ncells=",sum(!is.na(sD$Div.table$div.mean))))}
+    title(paste(names(list_gen)[i],"div.mean",sep = " "),sub=paste0("Radius=",sD$Radius,"km, refD=",sD$refD,"km, ScanResol=",sD$Dscan,"?, Ncells=",sum(!is.na(sD$Div.table$div.mean))))}
   
   #
-  plot(sD$Div.table.cleaned$subsample.size,sD$Div.table.cleaned$div.refD,ylim=c(0,1),title(sub=paste("N=", sum(!is.na(sD$Div.table.cleaned$div.refD))) ) ) #intrapolated divergence
+  plot(sD$Div.table.cleaned$subsample.size,sD$Div.table.cleaned$div.refD,ylim=c(0,1),title(paste(names(list_gen)[i]),sub=paste("N=", sum(!is.na(sD$Div.table.cleaned$div.refD))) ) ) #intrapolated divergence
   
   #Compare mean-div with interpolated div
-  plot(sD$Div.table.cleaned$div.mean,sD$Div.table.cleaned$div.refD,ylim=c(0,1),title(sub=paste("N=", sum(!is.na(sD$Div.table.cleaned$div.refD))) ) ) #intrapolated divergence
+  plot(sD$Div.table.cleaned$div.mean,sD$Div.table.cleaned$div.refD,ylim=c(0,1),title(paste(names(list_gen)[i]),sub=paste("N=", sum(!is.na(sD$Div.table.cleaned$div.refD))) ) ) #intrapolated divergence
   
   ##
   ## storing data across different parameters
+   
   list_r.div.refD[[paste("R",Radius,names(list_datageo)[i],sep='_')]]<-r.div.refD
   list_r.div.mean[[paste("R",Radius,names(list_datageo)[i],sep='_')]]<-r.div.mean
   list_sD[[paste("R",Radius,names(list_datageo)[i],sep='_')]]<-sD

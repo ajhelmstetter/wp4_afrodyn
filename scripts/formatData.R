@@ -331,13 +331,13 @@ list_datageo[['sm']]<-datageo
 # Distemonanthus	benthaniaus
 #####
 
-data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Distem381ind.txt",header = T,row.names=1)
+data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Distemonanthus benthamianus/inK=5_250814(approx data Demenou 2017).txt",header = T,row.names=1)
 
 ###
 #Geographic data
 ###
 
-datageo<-data[,1:2]
+datageo<-data[,2:3]
 geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
 
 ###
@@ -345,7 +345,7 @@ geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances 
 ###
 
 #extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
-dataind<-df2genind(data[,-1:-2],sep="-",NA.char="0",type = "codom")
+dataind<-df2genind(data[,c(-1:-3,-15)],sep="-",NA.char="0",type = "codom")
 
 #append to list
 list_geo[['db']]<-geodist
@@ -381,7 +381,295 @@ list_gen[['bf']]<-dataind
 list_datageo[['bf']]<-datageo
 
 
+############################################################################################################
+############################################################################################################
+#####
+# Erythrophleum ivorense
+#####
 
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/inSpag-Eivo.csv",header = T,row.names=1)
+
+###
+#Geographic data
+###
+
+datageo<-data[,1:2]
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,-1:-2],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['ei']]<-geodist
+list_gen[['ei']]<-dataind
+list_datageo[['ei']]<-datageo
+
+
+############################################################################################################
+############################################################################################################
+#####
+# Erythrophleum suaveolens (Ouest et centrale)
+#####
+
+# individual OH1579 had a duplicate, remove the one with missing data
+
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/inSpag-EsuaAC-EsuaW.csv",header = T,row.names=1)
+
+#remove genetic pool column
+data<-data[,-1]
+
+###
+#Geographic data
+###
+
+datageo<-data[,1:2]
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,-1:-2],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['es']]<-geodist
+list_gen[['es']]<-dataind
+list_datageo[['es']]<-datageo
+
+
+############################################################################################################
+############################################################################################################
+#####
+# Aukoumea klaineana
+#####
+
+data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Aukoumea klaineana/inAukoumea542ind(data_Born2011MolEcol).txt",header = T)
+
+###
+#Geographic data
+###
+
+datageo<-data[,c(4,3)]
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-4,-19)],ncode=3,NA.char="0",type = "codom")
+
+#append to list
+list_geo[['ak']]<-geodist
+list_gen[['ak']]<-dataind
+list_datageo[['ak']]<-datageo
+
+############################################################################################################
+############################################################################################################
+#####
+# Greenwayodendron suaveolens MICROSAT
+#####
+
+data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Greenwayodendron/inSpag9popGeo.txt",header = T,row.names=1)
+
+###
+#Geographic data
+###
+
+datageo<-data[,3:2]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-3,-12,-13)],ncode=3,NA.char="0",type = "codom")
+
+#append to list
+list_geo[['gs_ms']]<-geodist
+list_gen[['gs_ms']]<-dataind
+list_datageo[['gs_ms']]<-datageo
+
+############################################################################################################
+############################################################################################################
+#####
+# Santiria ebo
+#####
+
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Santiria/s_ebo.csv",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,2:1]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-2)],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['s_ebo']]<-geodist
+list_gen[['s_ebo']]<-dataind
+list_datageo[['s_ebo']]<-datageo
+
+
+############################################################################################################
+############################################################################################################
+#####
+# Santiria obovata
+#####
+
+#GiD2255 duplicated so 1 removed
+
+
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Santiria/s_obovata.csv",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,2:1]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-2)],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['s_obov']]<-geodist
+list_gen[['s_obov']]<-dataind
+list_datageo[['s_obov']]<-datageo
+
+
+############################################################################################################
+############################################################################################################
+#####
+# Santiria trimera central Africa
+#####
+
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Santiria/s_trim_CA.csv",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,2:1]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-2)],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['s_tr_ca']]<-geodist
+list_gen[['s_tr_ca']]<-dataind
+list_datageo[['s_tr_ca']]<-datageo
+
+############################################################################################################
+############################################################################################################
+#####
+# Santiria trimera west Africa
+#####
+
+data<-read.csv("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Santiria/s_trim_WA.csv",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,2:1]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-2)],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['s_tr_wa']]<-geodist
+list_gen[['s_tr_wa']]<-dataind
+list_datageo[['s_tr_wa']]<-datageo
+
+
+############################################################################################################
+############################################################################################################
+#####
+# Scorodophleus zenkeri
+#####
+
+data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Scorodophleus zenkeri/inScoro466ind6clusters.txt",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,3:2]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-3)],ncode=3,NA.char="0",type = "codom")
+
+#append to list
+list_geo[['s_zen']]<-geodist
+list_gen[['s_zen']]<-dataind
+list_datageo[['s_zen']]<-datageo
+
+############################################################################################################
+############################################################################################################
+#####
+# Terminalia superba
+#####
+
+data<-read.table("~/Dropbox/projects/AJH_WP4_AFRODYN/data/Terminalia superba/Inspagedi271-5pools.txt",header = T,row.names=1)
+
+###
+#Geographic data
+###
+str(data)
+datageo<-data[,3:2]
+datageo
+geodist<-as.dist(geod(lon=datageo$lon,lat=datageo$lat)) #great-circle distances (km)
+
+###
+# Microsats
+###
+
+#extract genotypic data in genind format (adegenet). sep defines the character separating alleles within locus
+dataind<-df2genind(data[,c(-1:-3,-18)],sep="-",NA.char="0",type = "codom")
+
+#append to list
+list_geo[['t_sup']]<-geodist
+list_gen[['t_sup']]<-dataind
+list_datageo[['t_sup']]<-datageo
 
 ##############
 # SAVE IMAGE #
